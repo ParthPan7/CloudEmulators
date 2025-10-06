@@ -1,0 +1,83 @@
+# ---------------------------
+# Terraform
+# ---------------------------
+# Local state files
+*.tfstate
+*.tfstate.backup
+
+# Crash logs
+crash.log
+
+# Auto-generated Terraform directories
+.terraform/
+.terraform.lock.hcl
+
+# Terraform provider binaries
+terraform/providers/
+
+# ---------------------------
+# LocalStack
+# ---------------------------
+# Persistent LocalStack data
+localstack-data/
+tmp/
+
+# ---------------------------
+# AWS CLI cache
+# ---------------------------
+~/.aws/cli/cache/
+
+# ---------------------------
+# Python
+# ---------------------------
+# Virtual environment
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+
+# ---------------------------
+# Logs
+# ---------------------------
+*.log
+
+# ---------------------------
+# OS / Editor
+# ---------------------------
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Vim / editors
+*.swp
+*.swo
+*.swn
+
+# JetBrains IDEs
+.idea/
+
+# VSCode
+.vscode/
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# ---------------------------
+# Archives / temp files
+# ---------------------------
+*.zip
+*.tar.gz
+*.tar.xz
+*.rar
+*.7z
+
+# Ignore Terraform lock files
+terraform/aws/.terraform.lock.hcl
