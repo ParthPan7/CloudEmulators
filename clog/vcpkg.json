@@ -1,0 +1,11 @@
+{
+  "name": "jitter",
+  "version": "0.1.0",
+  "dependencies": [
+    "qtbase",
+    {
+      "name": "aws-sdk-cpp",
+      "features": [ "s3" ]
+    }
+  ]
+}
