@@ -5,11 +5,16 @@
 #include <aws/s3/S3Client.h>
 #include <aws/s3/model/ListBucketsRequest.h>
 #include <iostream>
+#include "S3.hpp"
+#include "S3Congestion.hpp"
+
+using namespace clog;
+using namespace clog::aws;
 
 int main(int argc, char *argv[])
 {
-    // Init AWScd
      Aws::SDKOptions options;
+     
      Aws::InitAPI(options);
      {
          Aws::S3::S3Client s3_client;
@@ -24,12 +29,17 @@ int main(int argc, char *argv[])
                        << outcome.GetError().GetMessage() << std::endl;
          }
      }
+    Aws::Client::ClientConfiguration config;
+    config.endpointOverride = "http://localhost:4566";
+    std::unique_ptr<IS3> s3 = std::make_unique<S3>(config);
+    std::unique_ptr<ICongestion> _s3Congestion =  std::make_unique<S3Congestion>(std::move(s3));
+    _s3Congestion->generate();
 
     QApplication app(argc, argv);
     QLabel label("Qt + AWS SDK (Windows Ready)");
     label.resize(400, 200);
     label.show();
-
+     
     int ret = app.exec();
     Aws::ShutdownAPI(options);
     return ret;
