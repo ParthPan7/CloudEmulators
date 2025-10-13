@@ -1,13 +1,15 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <Aws.h>
+#include <aws/core/Aws.h>
+#include <aws/s3/S3Client.h>
 #include "IS3.hpp"
-namespace clog::aws {
+namespace clog::aws_jitter {
     class S3 : public IS3 {
-    
+        private:
+              Aws::S3::S3Client _s3Client;
         public:
-            void uploadS3File(const Aws::String &bucketName, const std::shared_ptr<Aws::IOStream> file, const std::string fileName) override;
+            void uploadS3File(const Aws::String &bucketName, const std::shared_ptr<Aws::IOStream> file, const std::string fileName) const override;
             std::vector<std::string> listS3Buckets() const override;
             S3(Aws::Client::ClientConfiguration config);
             ~S3();

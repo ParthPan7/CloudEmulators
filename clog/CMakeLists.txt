@@ -10,7 +10,18 @@ find_package(aws-cpp-sdk-core)
 find_package(aws-cpp-sdk-s3)
 
 
-add_executable(clog src/main.cpp)
+# Automatically gather all .cpp files in the 'src' directory
+file(GLOB_RECURSE SOURCES "src/*.cpp")
+
+
+
+add_executable(clog ${SOURCES})
+
+target_include_directories(clog
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/include/clog
+)
 
 target_link_libraries(clog
     PRIVATE

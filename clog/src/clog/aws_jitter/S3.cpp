@@ -1,25 +1,25 @@
-#include "S3.hpp"
-#include "IS3.hpp"
-#include "ICongestion.hpp"
+#include "aws_jitter/S3.hpp"
 #include <aws/core/Aws.h>
 #include <aws/s3/S3Client.h>
 #include <aws/s3/model/PutObjectRequest.h>
 
-namespace clog::aws
+namespace clog::aws_jitter
 {
-  class S3: public IS3
-  {
-        private:
-            Aws::S3::S3Client _s3Client;
-
-        public: 
-            S3(Aws::Client::ClientConfiguration config)
+   
+            S3::S3(Aws::Client::ClientConfiguration config)
             {
                 _s3Client = Aws::S3::S3Client(config);
             }
+            
+            S3::~S3()
+            {
 
-        protected:    
-            void uploadS3File(const Aws::String &bucketName, const std::shared_ptr<Aws::IOStream> file, const std::string fileName) override
+            }
+
+            std::vector<std::string> S3::listS3Buckets() const{
+
+            }
+            void S3::uploadS3File(const Aws::String &bucketName, const std::shared_ptr<Aws::IOStream> file, const std::string fileName) const
             {
                 Aws::S3::Model::PutObjectRequest request;
                 request.SetBucket(bucketName);
@@ -35,6 +35,5 @@ namespace clog::aws
                 {
                     std::cout << "error uploading file " << fileName << std::endl;
                 }
-            }
-  };  
+            } 
 };

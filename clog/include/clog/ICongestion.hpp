@@ -1,9 +1,11 @@
+#pragma once 
+
 namespace clog
 {
     class ICongestion
     {
         public:
-            virtual void generate();
-            ~ICongestion() = default;
+            virtual void generate() const = 0;
+            virtual ~ICongestion() = default;
     };
 };

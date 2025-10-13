@@ -5,11 +5,11 @@
 #include <aws/s3/S3Client.h>
 #include <aws/s3/model/ListBucketsRequest.h>
 #include <iostream>
-#include "S3.hpp"
-#include "S3Congestion.hpp"
+#include "aws_jitter/S3.hpp"
+#include "aws_jitter/S3Congestion.hpp"
 
 using namespace clog;
-using namespace clog::aws;
+using namespace clog::aws_jitter;
 
 int main(int argc, char *argv[])
 {
