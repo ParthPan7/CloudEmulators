@@ -7,6 +7,9 @@
 #include <iostream>
 #include "aws_jitter/S3.hpp"
 #include "aws_jitter/S3Congestion.hpp"
+#include "aws_jitter/IDynamoDB.hpp"
+#include "aws_jitter/DynamoDB.hpp"
+#include "aws_jitter/DynamoDBCongestion.hpp"
 
 using namespace clog;
 using namespace clog::aws_jitter;
@@ -34,9 +37,16 @@ int main(int argc, char *argv[])
     config.endpointOverride = "http://localhost:4566";
     config.checksumConfig.requestChecksumCalculation = Aws::Client::RequestChecksumCalculation::WHEN_REQUIRED;
     config.checksumConfig.responseChecksumValidation = Aws::Client::ResponseChecksumValidation::WHEN_REQUIRED; 
+    config.scheme = Aws::Http::Scheme::HTTP;
+    config.verifySSL = false;
+
     std::unique_ptr<IS3> s3 = std::make_unique<S3>(config);
-    std::unique_ptr<ICongestion> _s3Congestion =  std::make_unique<S3Congestion>(std::move(s3));
-    _s3Congestion->generate();
+    std::unique_ptr<ICongestion> s3Congestion =  std::make_unique<S3Congestion>(std::move(s3));
+    s3Congestion->generate();
+
+    std::unique_ptr<IDynamoDB> dynamoDB = std::make_unique<DynamoDB>(config);
+    std::unique_ptr<ICongestion> dynamoDBCongestion = std::make_unique<DynamoDBCongestion>(std::move(dynamoDB));
+    dynamoDBCongestion->generate();
 
     QApplication app(argc, argv);
     QLabel label("Qt + AWS SDK (Windows Ready)");

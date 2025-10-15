@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
 find_package(aws-cpp-sdk-core)
 find_package(aws-cpp-sdk-s3)
-
+find_package(aws-cpp-sdk-dynamodb)
 
 # Automatically gather all .cpp files in the 'src' directory
 file(GLOB_RECURSE SOURCES "src/*.cpp")
@@ -29,4 +29,5 @@ target_link_libraries(clog
         Qt6::Widgets
         aws-cpp-sdk-s3
         aws-cpp-sdk-core
+        aws-cpp-sdk-dynamodb
 )
