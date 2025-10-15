@@ -1,6 +1,7 @@
 #include "aws_jitter/S3.hpp"
 #include <aws/core/Aws.h>
 #include <aws/s3/S3Client.h>
+#include <aws/core/auth/AWSCredentials.h>
 #include <aws/s3/model/PutObjectRequest.h>
 
 namespace clog::aws_jitter
@@ -8,7 +9,10 @@ namespace clog::aws_jitter
    
             S3::S3(Aws::Client::ClientConfiguration config)
             {
-                _s3Client = Aws::S3::S3Client(config);
+                Aws::Auth::AWSCredentials creds(Aws::String("test"), Aws::String("test"));
+                _s3Client = Aws::S3::S3Client(creds, config,
+                Aws::Client::AWSAuthV4Signer::PayloadSigningPolicy::Always, 
+                false );
             }
             
             S3::~S3()

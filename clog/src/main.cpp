@@ -31,6 +31,8 @@ int main(int argc, char *argv[])
      }
     Aws::Client::ClientConfiguration config;
     config.endpointOverride = "http://localhost:4566";
+    config.checksumConfig.requestChecksumCalculation = Aws::Client::RequestChecksumCalculation::WHEN_REQUIRED;
+    config.checksumConfig.responseChecksumValidation = Aws::Client::ResponseChecksumValidation::WHEN_REQUIRED; 
     std::unique_ptr<IS3> s3 = std::make_unique<S3>(config);
     std::unique_ptr<ICongestion> _s3Congestion =  std::make_unique<S3Congestion>(std::move(s3));
     _s3Congestion->generate();

@@ -28,7 +28,7 @@ namespace clog::aws_jitter
     
             void S3Congestion::generate() const
             {
-                Aws::String bucketName = "test-bucket";
+                Aws::String bucketName = "my-demo-bucket";
                 Aws::SDKOptions options;
                 Aws::InitAPI(options);
                 {                   
