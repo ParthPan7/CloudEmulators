@@ -1,12 +1,13 @@
 version: '3.8'
 services:
   localstack:
-    image: localstack/localstack
+    image: localstack/localstack:latest
     container_name: localstack
     ports:
       - "4566:4566"
       - "4571:4571"
     environment:
+ #     - LS_S3_ALLOW_CHUNKED_UPLOADS=1
       - SERVICES=s3,ec2,dynamodb,lambda,cloudwatch
       - DEBUG=1
       - DATA_DIR=/tmp/localstack/data
