@@ -6,6 +6,7 @@
     {
       "name": "aws-sdk-cpp",
       "features": [ "s3" ]
-    }
+    },
+    "gtest"
   ]
 }
