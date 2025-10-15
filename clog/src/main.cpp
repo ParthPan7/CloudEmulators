@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
                        << outcome.GetError().GetMessage() << std::endl;
          }
      }
+     
     Aws::Client::ClientConfiguration config;
     config.endpointOverride = "http://localhost:4566";
     config.checksumConfig.requestChecksumCalculation = Aws::Client::RequestChecksumCalculation::WHEN_REQUIRED;
