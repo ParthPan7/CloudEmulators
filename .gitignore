@@ -81,3 +81,66 @@ desktop.ini
 
 # Ignore Terraform lock files
 terraform/aws/.terraform.lock.hcl
+
+# CMake build folders
+build/
+[Cc]MakeCache.txt
+[Cc]MakeFiles/
+CMakeScripts/
+Testing/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+
+# VS / VSCode / CLion build junk
+*.sln
+*.vcxproj*
+*.user
+*.opensdf
+*.sdf
+*.suo
+*.ncb
+*.obj
+*.pdb
+*.idb
+*.ilk
+*.log
+*.tlog
+*.lastbuildstate
+*.cache
+*.db
+*.VC.db
+.vscode/
+.idea/
+
+# Qt specific generated files
+*.qrc.depends
+*.moc
+*.moc.*
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+
+# Conan/vcpkg artifacts
+.conan/
+vcpkg_installed/
+.vs/
+
+# Exclude CMake presets (machine-specific)
+CMakePresets.json
+CMakeUserPresets.json
+
+# Executables / binaries
+*.exe
+*.dll
+*.lib
+*.so
+*.dylib
+*.app
+*.out
