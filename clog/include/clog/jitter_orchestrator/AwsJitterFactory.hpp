@@ -1,5 +1,6 @@
 #pragma once
 #include <aws/core/auth/AWSCredentials.h>
+#include <aws/core/client/ClientConfiguration.h>
 #include "IJitterFactory.hpp"
 namespace clog::jitter_orchestrator
 {
@@ -10,6 +11,6 @@ namespace clog::jitter_orchestrator
          public:   
             AwsJitterFactory();
             ~AwsJitterFactory();
-            std::shared_ptr<IJitterCommand> create(const std::string& type) override = 0;
+            std::shared_ptr<IJitterCommand> create(const std::string& type) override;
     };
 };

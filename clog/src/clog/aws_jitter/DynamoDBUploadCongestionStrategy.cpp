@@ -12,6 +12,9 @@ namespace clog::aws_jitter
         
     }
 
+    DynamoDBUploadCongestionStrategy::~DynamoDBUploadCongestionStrategy() 
+    { }
+
     int DynamoDBUploadCongestionStrategy::getNextItemId() 
     {
         return _id.fetch_add(1, std::memory_order_relaxed);

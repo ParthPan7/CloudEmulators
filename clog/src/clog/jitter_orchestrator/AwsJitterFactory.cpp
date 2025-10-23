@@ -14,6 +14,11 @@ namespace clog::jitter_orchestrator
         config.verifySSL = false;
     }
 
+    AwsJitterFactory::~AwsJitterFactory()
+    {
+
+    }
+
     std::shared_ptr<IJitterCommand> AwsJitterFactory::create(const std::string& type)
     {
         if (type == "dynamoDB_upload") 

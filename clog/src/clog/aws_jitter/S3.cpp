@@ -20,9 +20,12 @@ namespace clog::aws_jitter
 
             }
 
-            std::vector<std::string> S3::listS3Buckets() const{
-
+            std::vector<std::string> S3::listS3Buckets() const
+            {
+                std::vector<std::string> s3BucketsList;
+                return s3BucketsList;
             }
+
             void S3::uploadS3File(const Aws::String &bucketName, const std::shared_ptr<Aws::IOStream> file, const std::string fileName) const
             {
                 Aws::S3::Model::PutObjectRequest request;
