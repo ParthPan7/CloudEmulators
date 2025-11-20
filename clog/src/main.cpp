@@ -12,6 +12,7 @@
 #include "aws_jitter/IDynamoDB.hpp"
 #include "aws_jitter/DynamoDB.hpp"
 #include "aws_jitter/DynamoDBCongestion.hpp"
+#include "JitterCommands.hpp"
 
 using namespace clog;
 using namespace clog::aws_jitter;
@@ -22,25 +23,16 @@ int main(int argc, char *argv[])
      
      Aws::InitAPI(options);
      {
-         Aws::S3::S3Client s3_client;
-         auto outcome = s3_client.ListBuckets();
-         if (outcome.IsSuccess()) {
-             std::cout << "Buckets:\n";
-             for (auto const &bucket : outcome.GetResult().GetBuckets()) {
-                 std::cout << "  " << bucket.GetName() << std::endl;
-             }
-         } else {
-             std::cerr << "Error listing buckets: "
-                       << outcome.GetError().GetMessage() << std::endl;
-         }
+      
      }
      
     std::unique_ptr<IJitterFactory> awsResourceAllocFactory = std::make_unique<AwsJitterFactory>();
     if (awsResourceAllocFactory == nullptr) { std::cout << "AWS Resource Alloc. Factory has failed.."; }
-    std::shared_ptr<IJitterCommand> dynamoDBUploadPutCmd = awsResourceAllocFactory->create("dynamoDB_upload");
+    std::shared_ptr<IJitterCommand> dynamoDBUploadPutCmd = awsResourceAllocFactory->create(JitterCommands::DYNAMODB_UPLOAD);
     Scheduler scheduler;
     scheduler.addTask(dynamoDBUploadPutCmd, 10);
-
+    std::shared_ptr<IJitterCommand> dynamoDBDownloadGetCmd = awsResourceAllocFactory->create(JitterCommands::DYNAMODB_DOWNLOAD);
+    scheduler.addTask(dynamoDBDownloadGetCmd, 10);
     scheduler.start();
 
     std::this_thread::sleep_for(std::chrono::minutes(1));

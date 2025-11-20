@@ -11,6 +11,6 @@ namespace clog::jitter_orchestrator
          public:   
             AwsJitterFactory();
             ~AwsJitterFactory();
-            std::shared_ptr<IJitterCommand> create(const std::string& type) override;
+            std::shared_ptr<IJitterCommand> create(const JitterCommands& command) override;
     };
 };
