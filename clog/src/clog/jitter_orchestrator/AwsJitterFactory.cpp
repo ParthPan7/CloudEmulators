@@ -1,6 +1,8 @@
 #include "jitter_orchestrator/AwsJitterFactory.hpp"
 #include "jitter_orchestrator/JitterCommand.hpp"
 #include "aws_jitter/DynamoDBUploadCongestionStrategy.hpp"
+#include <aws_jitter/DynamoDBDownloadCongestionStrategy.hpp>
+#include <JitterCommands.hpp>
 #include <memory>
 namespace clog::jitter_orchestrator
 {
@@ -19,14 +21,20 @@ namespace clog::jitter_orchestrator
 
     }
 
-    std::shared_ptr<IJitterCommand> AwsJitterFactory::create(const std::string& type)
+    std::shared_ptr<IJitterCommand> AwsJitterFactory::create(const JitterCommands& command)
     {
-        if (type == "dynamoDB_upload") 
+        switch (command)
         {
-            return std::make_shared<JitterCommand>(
-            std::make_shared<clog::aws_jitter::DynamoDBUploadCongestionStrategy>(Aws::String("MyDemoTable"), config));
-        }
-        throw std::invalid_argument("Unknown jitter command type: " + type);
+            case JitterCommands::DYNAMODB_UPLOAD:
+                return std::make_shared<JitterCommand>(
+                    std::make_shared<clog::aws_jitter::DynamoDBUploadCongestionStrategy>(Aws::String("MyDemoTable"), config));
+            case JitterCommands::DYNAMODB_DOWNLOAD:
+                return std::make_shared<JitterCommand>(
+                    std::make_shared<clog::aws_jitter::DynamoDBDownloadCongestionStrategy>(Aws::String("MyDemoTable"), config));
+
+            default:
+                throw std::invalid_argument("Unknown jitter command type: ");
+        }        
     }
 
 };
