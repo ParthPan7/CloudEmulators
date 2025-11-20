@@ -35,20 +35,6 @@ int main(int argc, char *argv[])
          }
      }
      
-    //Aws::Client::ClientConfiguration config;
-    //config.endpointOverride = "http://localhost:4566";
-    //config.checksumConfig.requestChecksumCalculation = Aws::Client::RequestChecksumCalculation::WHEN_REQUIRED;
-    //config.checksumConfig.responseChecksumValidation = Aws::Client::ResponseChecksumValidation::WHEN_REQUIRED; 
-    //config.scheme = Aws::Http::Scheme::HTTP;
-    //config.verifySSL = false;
-
-    //std::unique_ptr<IS3> s3 = std::make_unique<S3>(config);
-    //std::unique_ptr<ICongestion> s3Congestion =  std::make_unique<S3Congestion>(std::move(s3));
-    //s3Congestion->generate();
-
-    //std::unique_ptr<IDynamoDB> dynamoDB = std::make_unique<DynamoDB>(config);
-    //std::unique_ptr<ICongestion> dynamoDBCongestion = std::make_unique<DynamoDBCongestion>(std::move(dynamoDB));
-    //dynamoDBCongestion->generate();
     std::unique_ptr<IJitterFactory> awsResourceAllocFactory = std::make_unique<AwsJitterFactory>();
     if (awsResourceAllocFactory == nullptr) { std::cout << "AWS Resource Alloc. Factory has failed.."; }
     std::shared_ptr<IJitterCommand> dynamoDBUploadPutCmd = awsResourceAllocFactory->create("dynamoDB_upload");
